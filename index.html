@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aitor JC — Extraordinary Digital Products &amp; Web Studio</title>
+  <meta name="description" content="Personal portfolio of Aitor JC — Web &amp; App Developer crafting modern websites, desktop utilities, mobile apps, and digital products." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f5f0;
+      --bg-elevated: #ffffff;
+      --bg-subtle: #eeece4;
+      --bg-glass: rgba(255, 255, 255, 0.8);
+      --border: rgba(13, 13, 17, 0.1);
+      --border-strong: rgba(13, 13, 17, 0.2);
+      --text: #0d0d11;
+      --text-secondary: #52525b;
+      --text-muted: #71717a;
+      --primary: #0d0d11;
+      --primary-fg: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.1);
+      --emerald: #059669;
+      --emerald-soft: rgba(5, 150, 105, 0.12);
+      --ease-humaan: cubic-bezier(0.5, 0.5, 0, 1);
+      --ease-pill: cubic-bezier(0.86, 0, 0.07, 1);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --shadow-soft: 0 18px 50px -18px rgba(13, 13, 17, 0.1), 0 4px 12px -4px rgba(13, 13, 17, 0.04);
+      --shadow-card: 0 24px 60px -20px rgba(13, 13, 17, 0.14);
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0a0a0e;
+      --bg-elevated: #13131a;
+      --bg-subtle: #1c1c26;
+      --bg-glass: rgba(19, 19, 26, 0.82);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-strong: rgba(255, 255, 255, 0.22);
+      --text: #f4f4f6;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --primary: #f4f4f6;
+      --primary-fg: #0a0a0e;
+      --accent: #60a5fa;
+      --accent-soft: rgba(96, 165, 250, 0.14);
+      --emerald: #34d399;
+      --emerald-soft: rgba(52, 211, 153, 0.14);
+      --shadow-soft: 0 20px 50px -15px rgba(0, 0, 0, 0.65);
+      --shadow-card: 0 30px 70px -20px rgba(0, 0, 0, 0.8);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.4s var(--ease-humaan), color 0.4s var(--ease-humaan);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Humaan Floating Custom Cursor Follower */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 120;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      background: #0d0d11;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+      transition: transform 0.35s var(--ease-humaan), opacity 0.25s ease;
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .custom-cursor {
+      background: #ffffff;
+      color: #0d0d11;
+    }
+
+    .custom-cursor.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .custom-cursor { display: none; }
+    }
+
+    /* Morphing Floating Pill Navbar */
+    .nav-wrap {
+      position: sticky;
+      top: 1.1rem;
+      z-index: 60;
+      padding: 0 1.5rem;
+      pointer-events: none;
+    }
+
+    .nav-pill {
+      pointer-events: auto;
+      max-width: 1180px;
+      margin: 0 auto;
+      background: var(--bg-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.45rem 0.55rem 0.45rem 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: var(--shadow-soft);
+      transition: max-width 0.45s var(--ease-pill), padding 0.45s var(--ease-pill), border-color 0.3s;
+    }
+
+    .nav-pill.scrolled {
+      max-width: 980px;
+      padding: 0.38rem 0.45rem 0.38rem 0.65rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .nav-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 24%;
+      background: var(--bg-subtle);
+      border: 1.5px solid var(--border-strong);
+    }
+
+    .nav-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+    }
+
+    .avail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--emerald-soft);
+      color: var(--emerald);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 2.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.8); }
+    }
+
+    /* Sliding Hover Pill inside Nav */
+    .nav-links {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .nav-hover-indicator {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.42s var(--ease-pill), width 0.42s var(--ease-pill), opacity 0.2s ease;
+    }
+
+    .nav-links a {
+      position: relative;
+      z-index: 2;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .pill-ctrl {
+      height: 36px;
+      padding: 0 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s var(--ease-humaan), background 0.15s ease;
+    }
+
+    .pill-ctrl:hover {
+      background: var(--bg-subtle);
+      transform: translateY(-1px);
+    }
+
+    .btn-cta {
+      height: 38px;
+      padding: 0 1.15rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--primary);
+      color: var(--primary-fg);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.3s var(--ease-humaan), opacity 0.15s;
+    }
+
+    @media (max-width: 960px) {
+      .nav-links, .avail-badge {
+        display: none;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5.5rem 0 3.5rem;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 3.5rem 0 2.5rem;
+        gap: 2.5rem;
+      }
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.15rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.65rem, 5.4vw, 4.65rem);
+      font-weight: 800;
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Humaan Split-Character Mask Reveal */
+    .split-word {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      padding-bottom: 0.08em;
+      margin-bottom: -0.08em;
+      margin-right: 0.24em;
+    }
+
+    .split-char {
+      display: inline-block;
+      transform: translateY(115%) rotate(4deg);
+      opacity: 0;
+      transition: transform 0.75s var(--ease-humaan), opacity 0.45s ease;
+    }
+
+    .split-ready .split-char {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+
+    .split-word.is-muted {
+      color: var(--text-muted);
+    }
+
+    .hero-desc {
+      font-size: 1.16rem;
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin-bottom: 2.15rem;
+      line-height: 1.65;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+    }
+
+    .btn-lg {
+      height: 52px;
+      padding: 0 1.65rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      cursor: pointer;
+      transition: transform 0.45s var(--ease-humaan), background 0.2s;
+      will-change: transform;
+    }
+
+    .btn-lg-primary {
+      background: var(--primary);
+      color: var(--primary-fg);
+      border: none;
+    }
+
+    .btn-lg-secondary {
+      background: var(--bg-elevated);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-lg-secondary:hover {
+      background: var(--bg-subtle);
+    }
+
+    /* Interactive 3D Mii Card */
+    .mii-stage {
+      perspective: 900px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mii-card {
+      width: 100%;
+      max-width: 390px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-card);
+      transform-style: preserve-3d;
+      transition: transform 0.25s var(--ease-humaan);
+      position: relative;
+    }
+
+    .mii-photo-wrap {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: radial-gradient(circle at 50% 38%, rgba(37, 99, 235, 0.16), var(--bg-subtle) 75%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 0.75rem 3.2rem;
+    }
+
+    .mii-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.18));
+      transition: transform 0.7s var(--ease-humaan);
+    }
+
+    .mii-card:hover .mii-photo-wrap img {
+      transform: scale(1.04) translateY(-4px);
+    }
+
+    .mii-float-tag {
+      position: absolute;
+      bottom: 0.85rem;
+      left: 0.85rem;
+      right: 0.85rem;
+      background: rgba(13, 13, 17, 0.84);
+      backdrop-filter: blur(12px);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      padding: 0.7rem 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      transform: translateZ(24px);
+    }
+
+    .mii-card-meta {
+      padding: 1rem 0.35rem 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+    }
+
+    .mii-card-meta strong {
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Humaan Scroll-Expanding Showreel (clip-path round 22px) */
+    .showreel-section {
+      padding: 2rem 0 4.5rem;
+    }
+
+    .showreel-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: 680px;
+      background: #09090b;
+      overflow: hidden;
+      cursor: pointer;
+      clip-path: inset(var(--inset-y, 3%) var(--inset-x, 5%) round 24px);
+      transition: clip-path 0.12s linear;
+      box-shadow: var(--shadow-card);
+    }
+
+    .showreel-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s var(--ease-humaan);
+    }
+
+    .showreel-frame:hover video {
+      transform: scale(1.025);
+    }
+
+    .showreel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(9, 9, 11, 0.7) 0%, transparent 45%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 2rem 2.5rem;
+      color: #ffffff;
+    }
+
+    .showreel-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.55rem 1.15rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    /* Humaan Scroll-Driven Word Manifesto (.jVsATG_word style) */
+    .manifesto-section {
+      padding: 4rem 0 5.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .manifesto-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.1rem, 4.4vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      max-width: 1060px;
+    }
+
+    .manifesto-word {
+      position: relative;
+      display: inline-block;
+      margin-right: 0.26em;
+      color: var(--text-muted);
+      opacity: 0.28;
+    }
+
+    .manifesto-word-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--text);
+      clip-path: inset(0% 0% calc(100% - var(--progress, 0) * 150%));
+      white-space: nowrap;
+    }
+
+    /* Section Headers */
+    .sec-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .sec-head h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+    }
+
+    .sec-head p {
+      max-width: 420px;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+    }
+
+    /* Case Studies with Humaan enter-grid + 0.7s hover zoom */
+    .work-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      margin-bottom: 6rem;
+    }
+
+    .case-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 2.5rem;
+      align-items: center;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.7s var(--ease-humaan), border-color 0.3s;
+    }
+
+    .case-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    @media (max-width: 960px) {
+      .case-card {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+    }
+
+    .case-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: inline-block;
+    }
+
+    .case-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .case-card p {
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.65rem;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.73rem;
+      font-weight: 600;
+      padding: 0.32rem 0.7rem;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+    }
+
+    .case-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .btn-sm-pill {
+      height: 40px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--bg);
+      color: var(--text);
+      transition: transform 0.35s var(--ease-humaan), background 0.15s ease;
+    }
+
+    .btn-sm-pill:hover {
+      background: var(--bg-subtle);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm-pill.solid {
+      background: var(--primary);
+      color: var(--primary-fg);
+      border-color: var(--primary);
+    }
+
+    .case-visual {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+
+    .case-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.7s var(--ease-humaan);
+    }
+
+    .case-card:hover .case-visual img {
+      transform: scale(1.04);
+    }
+
+    /* Live Interactive SaaS Widget inside Case 02 */
+    .saas-widget {
+      background: #0d0d12;
+      color: #f4f4f6;
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .saas-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .saas-tabs {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 3px;
+      border-radius: 999px;
+    }
+
+    .saas-tab {
+      border: none;
+      background: transparent;
+      color: #a1a1aa;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.25s var(--ease-humaan), color 0.2s;
+    }
+
+    .saas-tab.active {
+      background: #ffffff;
+      color: #09090b;
+    }
+
+    .saas-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .kpi-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 12px;
+      padding: 0.8rem;
+    }
+
+    .kpi-box span {
+      display: block;
+      font-size: 0.7rem;
+      color: #a1a1aa;
+    }
+
+    .kpi-box strong {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      color: #ffffff;
+    }
+
+    /* Interactive Command Palette Widget inside Case 03 */
+    .cmd-widget {
+      background: #111116;
+      color: #f4f4f6;
+      border-radius: var(--radius-lg);
+      padding: 1.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .cmd-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .cmd-btn {
+      width: 100%;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: #e4e4e7;
+      padding: 0.65rem 0.85rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.25s var(--ease-humaan), transform 0.25s var(--ease-humaan);
+    }
+
+    .cmd-btn:hover,
+    .cmd-btn.active {
+      background: rgba(37, 99, 235, 0.25);
+      border-color: #60a5fa;
+      transform: translateX(4px);
+    }
+
+    .cmd-output {
+      background: #07070a;
+      border-radius: 10px;
+      padding: 0.85rem;
+      font-size: 0.76rem;
+      color: #34d399;
+      min-height: 64px;
+      line-height: 1.5;
+    }
+
+    /* Humaan "What's New" Editorial Feed */
+    .news-list {
+      border-top: 1px solid var(--border);
+      margin-bottom: 6rem;
+    }
+
+    .news-row {
+      display: grid;
+      grid-template-columns: 160px 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s var(--ease-humaan), padding-left 0.35s var(--ease-humaan);
+    }
+
+    .news-row:hover {
+      background: var(--bg-elevated);
+      padding-left: 1.75rem;
+    }
+
+    .news-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .news-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .news-arrow {
+      font-size: 1.15rem;
+      transition: transform 0.3s var(--ease-humaan);
+    }
+
+    .news-row:hover .news-arrow {
+      transform: translate(4px);
+    }
+
+    @media (max-width: 720px) {
+      .news-row {
+        grid-template-columns: 1fr auto;
+      }
+      .news-date { grid-column: 1 / -1; }
+    }
+
+    /* Services 4-Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 6rem;
+    }
+
+    @media (max-width: 780px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .srv-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+      transition: transform 0.45s var(--ease-humaan), border-color 0.25s ease;
+    }
+
+    .srv-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+    }
+
+    .srv-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .srv-idx {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .srv-time {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .srv-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.45rem;
+    }
+
+    .srv-card p {
+      color: var(--text-secondary);
+      font-size: 0.94rem;
+    }
+
+    /* Footer CTA */
+    .footer-cta {
+      background: var(--primary);
+      color: var(--primary-fg);
+      border-radius: 32px;
+      padding: 4.5rem 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .footer-cta h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .footer-cta p {
+      opacity: 0.78;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+      font-size: 1.05rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn-invert {
+      height: 50px;
+      padding: 0 1.5rem;
+      border-radius: 999px;
+      background: var(--primary-fg);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.35s var(--ease-humaan);
+    }
+
+    .btn-invert-outline {
+      height: 50px;
+      padding: 0 1.5rem;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--primary-fg);
+      border: 1px solid color-mix(in srgb, var(--primary-fg) 30%, transparent);
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.35s var(--ease-humaan);
+    }
+
+    footer.site-foot {
+      padding: 1.5rem 0 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* Native Modal <dialog> */
+    dialog {
+      margin: auto;
+      border: 1px solid var(--border-strong);
+      border-radius: 24px;
+      background: var(--bg-elevated);
+      color: var(--text);
+      padding: 1.75rem;
+      max-width: 740px;
+      width: calc(100% - 2rem);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+    }
+
+    dialog::backdrop {
+      background: rgba(9, 9, 11, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-head h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .close-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .est-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.65rem 0 1.25rem;
+    }
+
+    .est-chip {
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .est-chip.active {
+      background: var(--primary);
+      color: var(--primary-fg);
+      border-color: var(--primary);
+    }
+
+    .est-summary {
+      background: var(--bg-subtle);
+      border-radius: 14px;
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      margin-bottom: 1.15rem;
+      white-space: pre-line;
+    }
+
+    /* Humaan enter-grid (4vw upward lift with cubic-bezier(0.5, 0.5, 0, 1)) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(4vw);
+      transition: opacity 0.7s var(--ease-humaan), transform 0.7s var(--ease-humaan);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-dot { animation: none; }
+      .reveal, .split-char { opacity: 1; transform: none; transition: none; }
+      .showreel-frame { clip-path: inset(0 round 24px); }
+      .manifesto-word { opacity: 1; }
+      .manifesto-word-fill { clip-path: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Humaan Custom Floating Cursor -->
+  <div class="custom-cursor" id="customCursor" aria-hidden="true">Explore ↗</div>
+
+  <!-- Floating Morphing Pill Header -->
+  <div class="nav-wrap">
+    <nav class="nav-pill" id="navPill" aria-label="Main navigation">
+      <a href="#" class="nav-brand">
+        <img src="assets/avatar.png" alt="Aitor JC Mii Avatar" class="nav-avatar" />
+        <span class="nav-name">Aitor JC</span>
+        <span class="avail-badge">
+          <span class="pulse-dot"></span>
+          <span data-i18n="avail">Available for projects</span>
+        </span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <div class="nav-hover-indicator" id="navHoverPill" aria-hidden="true"></div>
+        <a href="#showreel" data-i18n="navShowreel">Showreel</a>
+        <a href="#work" data-i18n="navWork">Work</a>
+        <a href="#services" data-i18n="navServices">Services</a>
+        <a href="#news" data-i18n="navNews">What's New</a>
+      </div>
+
+      <div class="nav-actions">
+        <button type="button" class="pill-ctrl" id="langToggle" aria-label="Switch language">ES / EN</button>
+        <button type="button" class="pill-ctrl" id="themeToggle" aria-label="Toggle dark mode">☾</button>
+        <button type="button" class="btn-cta" data-magnetic id="openEstimatorTop" data-i18n="navCta">Start a Project ↗</button>
+      </div>
+    </nav>
+  </div>
+
+  <main class="container">
+    <!-- Hero with Humaan Split-Character Mask Reveal -->
+    <section class="hero">
+      <div>
+        <div class="eyebrow">
+          <span>SPAIN · UTC+1</span>
+          <span>/</span>
+          <span data-i18n="eyebrowRole">WEB, DESKTOP &amp; MOBILE STUDIO</span>
+        </div>
+        <h1 id="heroHeadline" data-split-text>
+          Extraordinary Digital Products.
+        </h1>
+        <p class="hero-desc" data-i18n="heroDesc">
+          I'm Aitor, an independent software &amp; web developer designing, building and shipping fast websites, desktop utilities, mobile apps, and zero-bloat micro-SaaS tools.
+        </p>
+        <div class="hero-buttons">
+          <a href="#work" class="btn-lg btn-lg-primary" data-magnetic data-i18n="heroBtnWork">Explore Selected Work ↓</a>
+          <button type="button" class="btn-lg btn-lg-secondary" data-magnetic id="openEstimatorHero" data-i18n="heroBtnEst">Scope a Project</button>
+        </div>
+      </div>
+
+      <div class="mii-stage">
+        <div class="mii-card" id="miiTiltCard" data-cursor="Hey! 👋">
+          <div class="mii-photo-wrap">
+            <img src="assets/avatar.png" alt="Aitor JC — Web and App Developer" />
+            <div class="mii-float-tag">
+              <span>⚡ <strong data-i18n="cardTurnaround">48–72h Turnaround</strong></span>
+              <span style="opacity:0.8;">@aitorjc</span>
+            </div>
+          </div>
+          <div class="mii-card-meta">
+            <span><strong data-i18n="cardFocus">Focus:</strong> Web · Desktop · Apps</span>
+            <span>★ 5.0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scroll-Expanding Humaan Showreel -->
+    <section id="showreel" class="showreel-section">
+      <div class="showreel-frame" id="showreelFrame" data-cursor="Play Full Demo ▶" role="button" tabindex="0" aria-label="Open full InvoiceCraft Pro demo video">
+        <video src="assets/invoicecraft-demo.mp4" autoplay muted loop playsinline></video>
+        <div class="showreel-overlay">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; opacity:0.8; margin-bottom:0.35rem;">2026 PRODUCT SHOWREEL</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.5rem; font-weight:800;">InvoiceCraft Pro — Kinetic Studio</div>
+          </div>
+          <span class="showreel-pill" data-i18n="showreelPill">▶ Watch with Controls</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Humaan Scroll-Driven Word-by-Word Manifesto -->
+    <section class="manifesto-section" id="manifestoSection">
+      <div class="manifesto-text" id="manifestoText" data-manifesto>
+        We design, build and ship world-class digital products for forward-thinking brands and founders.
+      </div>
+    </section>
+
+    <!-- Selected Work -->
+    <section id="work">
+      <div class="sec-head reveal">
+        <h2 data-i18n="workHeading">Selected Work &amp; Live Labs</h2>
+        <p data-i18n="workSub">Real shipped products and interactive prototypes you can test right inside the browser.</p>
+      </div>
+
+      <div class="work-stack">
+        <!-- Project 01 -->
+        <article class="case-card reveal" data-cursor="InvoiceCraft Pro ↗">
+          <div>
+            <span class="case-num">01 / FEATURED COMMERCIAL PRODUCT</span>
+            <h3>InvoiceCraft Pro</h3>
+            <p data-i18n="p1Desc">
+              A 100% offline, browser-based PDF Invoice, Quote &amp; Receipt studio built for freelancers tired of $15/mo subscriptions. Bilingual (EN/ES), multi-currency, local storage archive, and vector PDF export.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Vanilla JS</span>
+              <span class="tag">Print CSS Engine</span>
+              <span class="tag">LocalStorage</span>
+              <span class="tag">Bilingual i18n</span>
+            </div>
+            <div class="case-actions">
+              <a href="demos/invoicecraft/index.html" target="_blank" rel="noopener" class="btn-sm-pill solid" data-i18n="p1TryLive">Launch Live App ↗</a>
+              <button type="button" class="btn-sm-pill" id="openVideoBtn" data-i18n="p1WatchVideo">▶ Watch 18s Demo</button>
+              <a href="https://aitorjc.gumroad.com/l/invoicecraft-pro" target="_blank" rel="noopener" class="btn-sm-pill">Gumroad ↗</a>
+            </div>
+          </div>
+          <div class="case-visual">
+            <img src="assets/invoicecraft-cover.png" alt="InvoiceCraft Pro UI preview" loading="lazy" />
+          </div>
+        </article>
+
+        <!-- Project 02 -->
+        <article class="case-card reveal" data-cursor="Click Timeframes ⚡">
+          <div>
+            <span class="case-num">02 / LIVE INTERACTIVE DASHBOARD</span>
+            <h3>PulseBoard Analytics</h3>
+            <p data-i18n="p2Desc">
+              Interactive SaaS revenue &amp; conversion telemetry concept. Click the timeframe pills on the right to see live SVG chart morphing and real-time KPI recalculations.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Interactive SVG</span>
+              <span class="tag">FinTech UI</span>
+              <span class="tag">Zero Dependencies</span>
+            </div>
+          </div>
+
+          <div class="saas-widget" aria-label="Interactive dashboard demo">
+            <div class="saas-top">
+              <strong style="font-size:0.9rem;">PulseBoard · Live Preview</strong>
+              <div class="saas-tabs" role="tablist">
+                <button type="button" class="saas-tab active" data-range="7d">7 Days</button>
+                <button type="button" class="saas-tab" data-range="30d">30 Days</button>
+                <button type="button" class="saas-tab" data-range="12m">12 Months</button>
+              </div>
+            </div>
+            <div class="saas-kpis">
+              <div class="kpi-box"><span>Net Revenue</span><strong id="kpiRev">$4,280</strong></div>
+              <div class="kpi-box"><span>Conversion</span><strong id="kpiConv">4.8%</strong></div>
+              <div class="kpi-box"><span>Active Users</span><strong id="kpiUsers">1,420</strong></div>
+            </div>
+            <svg viewBox="0 0 420 120" width="100%" height="115" aria-hidden="true">
+              <defs>
+                <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path id="chartArea" d="M0,95 L70,78 L140,82 L210,50 L280,58 L350,30 L420,18 L420,120 L0,120 Z" fill="url(#chartGrad)" />
+              <path id="chartLine" d="M0,95 L70,78 L140,82 L210,50 L280,58 L350,30 L420,18" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- Project 03 -->
+        <article class="case-card reveal" data-cursor="Run Workflows ↵">
+          <div>
+            <span class="case-num">03 / DESKTOP &amp; AUTOMATION UTILITY</span>
+            <h3>FocusFlow Command Kit</h3>
+            <p data-i18n="p3Desc">
+              Rapid desktop &amp; browser productivity utilities designed for non-technical teams. Test any automated workflow action on the right to preview instant structured output.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Desktop Apps</span>
+              <span class="tag">Python Automation</span>
+              <span class="tag">Chrome Extensions</span>
+            </div>
+          </div>
+
+          <div class="cmd-widget">
+            <div style="font-size:0.72rem; color:#a1a1aa; margin-bottom:0.75rem;">CLICK A WORKFLOW ACTION TO RUN:</div>
+            <div class="cmd-list">
+              <button type="button" class="cmd-btn active" data-cmd="csv">
+                <span>&gt; clean_shopify_orders.py --export-json</span>
+                <span>RUN ↵</span>
+              </button>
+              <button type="button" class="cmd-btn" data-cmd="seo">
+                <span>&gt; audit_landing_cwv --target=client.com</span>
+                <span>RUN ↵</span>
+              </button>
+              <button type="button" class="cmd-btn" data-cmd="ext">
+                <span>&gt; build_chrome_extension --manifest-v3</span>
+                <span>RUN ↵</span>
+              </button>
+            </div>
+            <div class="cmd-output" id="cmdOutput">
+              ✓ Parsed 1,248 rows · Removed 34 duplicates · Exported clean_orders.json in 0.14s
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="sec-head reveal">
+        <h2 data-i18n="srvHeading">What We Can Build Together</h2>
+        <p data-i18n="srvSub">Fast turnaround, clean maintainable code, and direct communication from kickoff to launch.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="srv-card reveal">
+          <div>
+            <div class="srv-top"><span class="srv-idx">01</span><span class="srv-time">2–4 Days</span></div>
+            <h3 data-i18n="s1Title">Websites &amp; Landing Pages</h3>
+            <p data-i18n="s1Desc">High-converting, responsive marketing sites, portfolios, and product pages with dark/light mode and crisp micro-interactions.</p>
+          </div>
+        </div>
+        <div class="srv-card reveal">
+          <div>
+            <div class="srv-top"><span class="srv-idx">02</span><span class="srv-time">3–7 Days</span></div>
+            <h3 data-i18n="s2Title">Web &amp; Desktop Applications</h3>
+            <p data-i18n="s2Desc">Custom dashboards, client portals, calculators, PDF generators, and standalone Windows/Mac desktop utilities.</p>
+          </div>
+        </div>
+        <div class="srv-card reveal">
+          <div>
+            <div class="srv-top"><span class="srv-idx">03</span><span class="srv-time">3–5 Days</span></div>
+            <h3 data-i18n="s3Title">Chrome Extensions &amp; Mobile</h3>
+            <p data-i18n="s3Desc">Manifest V3 browser extensions, productivity popups, and clean mobile app prototypes ready to ship.</p>
+          </div>
+        </div>
+        <div class="srv-card reveal">
+          <div>
+            <div class="srv-top"><span class="srv-idx">04</span><span class="srv-time">1–3 Days</span></div>
+            <h3 data-i18n="s4Title">Scripts &amp; Workflow Automation</h3>
+            <p data-i18n="s4Desc">Python scripts, CSV/Excel cleaners, API integrations, and internal business tools that eliminate repetitive manual tasks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's New Editorial Feed (Humaan Signature) -->
+    <section id="news">
+      <div class="sec-head reveal">
+        <h2 data-i18n="newsHeading">What's New</h2>
+        <p data-i18n="newsSub">Recent releases, experiments, and product milestones.</p>
+      </div>
+
+      <div class="news-list reveal">
+        <a href="https://aitorjc.gumroad.com/l/invoicecraft-pro" target="_blank" rel="noopener" class="news-row" data-cursor="View Launch ↗">
+          <span class="news-date">NOV 2026</span>
+          <span class="news-title" data-i18n="n1Title">InvoiceCraft Pro v1.0 Launched on Gumroad &amp; Product Hunt</span>
+          <span class="news-arrow">↗</span>
+        </a>
+        <a href="demos/invoicecraft/index.html" target="_blank" rel="noopener" class="news-row" data-cursor="Test Live ↗">
+          <span class="news-date">NOV 2026</span>
+          <span class="news-title" data-i18n="n2Title">Zero-Dependency Vector PDF Print Engine Released Openly as Live Demo</span>
+          <span class="news-arrow">↗</span>
+        </a>
+        <a href="https://es.fiverr.com/s/qb5r1a5" target="_blank" rel="noopener" class="news-row" data-cursor="Hire Me ↗">
+          <span class="news-date">OPEN</span>
+          <span class="news-title" data-i18n="n3Title">Booking Custom Web, Desktop &amp; Chrome Extension Sprints on Fiverr</span>
+          <span class="news-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section id="contact" class="footer-cta reveal">
+      <h2 data-i18n="ctaTitle">Have an idea worth shipping?</h2>
+      <p data-i18n="ctaSub">Let's turn your concept into a polished website, desktop utility, or web app this week.</p>
+      <div class="footer-links">
+        <button type="button" class="btn-invert" data-magnetic id="openEstimatorFooter" data-i18n="ctaBtnEst">Estimate Your Project</button>
+        <a href="https://es.fiverr.com/s/qb5r1a5" target="_blank" rel="noopener" class="btn-invert-outline" data-magnetic>Fiverr Profile ↗</a>
+        <a href="https://github.com/Kill4Infinity" target="_blank" rel="noopener" class="btn-invert-outline" data-magnetic>GitHub ↗</a>
+        <a href="https://aitorjc.gumroad.com" target="_blank" rel="noopener" class="btn-invert-outline" data-magnetic>Gumroad Store ↗</a>
+      </div>
+    </section>
+
+    <footer class="site-foot">
+      <span>© 2026 Aitor JC — Built with clean code &amp; zero bloat.</span>
+      <span>Madrid, Spain · Available worldwide</span>
+    </footer>
+  </main>
+
+  <!-- Video Demo Modal -->
+  <dialog id="videoModal">
+    <div class="modal-head">
+      <h3>InvoiceCraft Pro — 18s Walkthrough</h3>
+      <button type="button" class="close-btn" id="closeVideoBtn" aria-label="Close modal">✕</button>
+    </div>
+    <video id="demoVideoPlayer" controls playsinline style="width:100%; border-radius:14px; background:#000;">
+      <source src="assets/invoicecraft-demo.mp4" type="video/mp4" />
+    </video>
+  </dialog>
+
+  <!-- Project Estimator Modal -->
+  <dialog id="estimatorModal">
+    <div class="modal-head">
+      <h3 data-i18n="estTitle">Quick Project Scope Builder</h3>
+      <button type="button" class="close-btn" id="closeEstBtn" aria-label="Close modal">✕</button>
+    </div>
+    <div style="font-size:0.85rem; color:var(--text-secondary);" data-i18n="estPickType">1. What are we building?</div>
+    <div class="est-chips" id="estTypeGroup">
+      <button type="button" class="est-chip active" data-val="Landing Page / Portfolio">Landing Page</button>
+      <button type="button" class="est-chip" data-val="Custom Web App / Dashboard">Web App</button>
+      <button type="button" class="est-chip" data-val="Desktop Utility / Script">Desktop App</button>
+      <button type="button" class="est-chip" data-val="Chrome Extension">Chrome Extension</button>
+    </div>
+    <div style="font-size:0.85rem; color:var(--text-secondary);" data-i18n="estPickSpeed">2. Target timeline:</div>
+    <div class="est-chips" id="estSpeedGroup">
+      <button type="button" class="est-chip active" data-val="Express (48–72 hours)">Express (48–72h)</button>
+      <button type="button" class="est-chip" data-val="Standard (1 week)">Standard (1 week)</button>
+      <button type="button" class="est-chip" data-val="Flexible">Flexible</button>
+    </div>
+    <div class="est-summary" id="estSummaryBox"></div>
+    <div style="display:flex; gap:0.65rem; flex-wrap:wrap;">
+      <button type="button" class="btn-sm-pill solid" id="copyBriefBtn" data-i18n="estCopy">📋 Copy Brief for Fiverr / Email</button>
+      <a href="https://es.fiverr.com/s/qb5r1a5" target="_blank" rel="noopener" class="btn-sm-pill">Open Fiverr ↗</a>
+    </div>
+  </dialog>
+
+  <script>
+    const I18N = {
+      en: {
+        avail: "Available for projects",
+        navShowreel: "Showreel",
+        navWork: "Work",
+        navServices: "Services",
+        navNews: "What's New",
+        navCta: "Start a Project ↗",
+        eyebrowRole: "WEB, DESKTOP & MOBILE STUDIO",
+        heroHeadline: "Extraordinary Digital Products.",
+        heroDesc: "I'm Aitor, an independent software & web developer designing, building and shipping fast websites, desktop utilities, mobile apps, and zero-bloat micro-SaaS tools.",
+        heroBtnWork: "Explore Selected Work ↓",
+        heroBtnEst: "Scope a Project",
+        cardTurnaround: "48–72h Turnaround",
+        cardFocus: "Focus:",
+        showreelPill: "▶ Watch with Controls",
+        manifesto: "We design, build and ship world-class digital products for forward-thinking brands and founders.",
+        workHeading: "Selected Work & Live Labs",
+        workSub: "Real shipped products and interactive prototypes you can test right inside the browser.",
+        p1Desc: "A 100% offline, browser-based PDF Invoice, Quote & Receipt studio built for freelancers tired of $15/mo subscriptions. Bilingual (EN/ES), multi-currency, local storage archive, and vector PDF export.",
+        p1TryLive: "Launch Live App ↗",
+        p1WatchVideo: "▶ Watch 18s Demo",
+        p2Desc: "Interactive SaaS revenue & conversion telemetry concept. Click the timeframe pills on the right to see live SVG chart morphing and real-time KPI recalculations.",
+        p3Desc: "Rapid desktop & browser productivity utilities designed for non-technical teams. Test any automated workflow action on the right to preview instant structured output.",
+        srvHeading: "What We Can Build Together",
+        srvSub: "Fast turnaround, clean maintainable code, and direct communication from kickoff to launch.",
+        s1Title: "Websites & Landing Pages",
+        s1Desc: "High-converting, responsive marketing sites, portfolios, and product pages with dark/light mode and crisp micro-interactions.",
+        s2Title: "Web & Desktop Applications",
+        s2Desc: "Custom dashboards, client portals, calculators, PDF generators, and standalone Windows/Mac desktop utilities.",
+        s3Title: "Chrome Extensions & Mobile",
+        s3Desc: "Manifest V3 browser extensions, productivity popups, and clean mobile app prototypes ready to ship.",
+        s4Title: "Scripts & Workflow Automation",
+        s4Desc: "Python scripts, CSV/Excel cleaners, API integrations, and internal business tools that eliminate repetitive manual tasks.",
+        newsHeading: "What's New",
+        newsSub: "Recent releases, experiments, and product milestones.",
+        n1Title: "InvoiceCraft Pro v1.0 Launched on Gumroad & Product Hunt",
+        n2Title: "Zero-Dependency Vector PDF Print Engine Released Openly as Live Demo",
+        n3Title: "Booking Custom Web, Desktop & Chrome Extension Sprints on Fiverr",
+        ctaTitle: "Have an idea worth shipping?",
+        ctaSub: "Let's turn your concept into a polished website, desktop utility, or web app this week.",
+        ctaBtnEst: "Estimate Your Project",
+        estTitle: "Quick Project Scope Builder",
+        estPickType: "1. What are we building?",
+        estPickSpeed: "2. Target timeline:",
+        estCopy: "📋 Copy Brief for Fiverr / Email"
+      },
+      es: {
+        avail: "Disponible para proyectos",
+        navShowreel: "Showreel",
+        navWork: "Proyectos",
+        navServices: "Servicios",
+        navNews: "Novedades",
+        navCta: "Empezar Proyecto ↗",
+        eyebrowRole: "ESTUDIO WEB, ESCRITORIO Y APPS",
+        heroHeadline: "Productos Digitales Extraordinarios.",
+        heroDesc: "Soy Aitor, desarrollador independiente de software y web. Diseño páginas que convierten, paneles interactivos, herramientas de escritorio y micro-SaaS sin complicaciones.",
+        heroBtnWork: "Ver Proyectos ↓",
+        heroBtnEst: "Presupuestar Idea",
+        cardTurnaround: "Entrega en 48–72h",
+        cardFocus: "Especialidad:",
+        showreelPill: "▶ Ver con Controles",
+        manifesto: "Diseñamos, programamos y lanzamos productos digitales de primer nivel para marcas y fundadores ambiciosos.",
+        workHeading: "Proyectos y Demos en Vivo",
+        workSub: "Productos reales publicados y prototipos interactivos que puedes probar directamente desde el navegador.",
+        p1Desc: "Estudio 100% offline en el navegador para crear Facturas, Presupuestos y Recibos en PDF sin suscripciones mensuales. Bilingüe (ES/EN), multimoneda, historial local y exportación vectorial.",
+        p1TryLive: "Probar App en Vivo ↗",
+        p1WatchVideo: "▶ Ver Demo de 18s",
+        p2Desc: "Concepto interactivo de analítica SaaS. Haz clic en los botones de tiempo a la derecha para ver cambiar la gráfica SVG y las métricas en tiempo real.",
+        p3Desc: "Utilidades rápidas de escritorio y navegador para ahorrar horas de trabajo manual. Pulsa cualquier comando a la derecha para ver su ejecución simulada.",
+        srvHeading: "Qué Podemos Construir Juntos",
+        srvSub: "Entregas rápidas, código limpio y comunicación directa desde la idea hasta el lanzamiento.",
+        s1Title: "Webs y Landing Pages",
+        s1Desc: "Páginas modernas y adaptables para negocios, portfolios y lanzamientos con modo oscuro/claro y animaciones fluidas.",
+        s2Title: "Apps Web y de Escritorio",
+        s2Desc: "Paneles internos, portales de clientes, calculadoras, generadores de PDF y programas de escritorio para Windows/Mac.",
+        s3Title: "Extensiones de Chrome y Móvil",
+        s3Desc: "Extensiones de navegador Manifest V3, herramientas de productividad y prototipos de apps móviles listos para publicar.",
+        s4Title: "Scripts y Automatización",
+        s4Desc: "Scripts en Python, limpiadores de CSV/Excel, integraciones con APIs y automatizaciones para eliminar tareas repetitivas.",
+        newsHeading: "Novedades",
+        newsSub: "Últimos lanzamientos, experimentos e hitos recientes.",
+        n1Title: "Lanzamiento de InvoiceCraft Pro v1.0 en Gumroad y Product Hunt",
+        n2Title: "Motor PDF vectorial sin dependencias publicado como demo en vivo",
+        n3Title: "Agenda abierta en Fiverr para webs, apps de escritorio y extensiones",
+        ctaTitle: "¿Tienes una idea lista para lanzar?",
+        ctaSub: "Convirtamos tu proyecto en una web, app de escritorio o herramienta funcional esta misma semana.",
+        ctaBtnEst: "Configurar Proyecto",
+        estTitle: "Resumen Rápido de Proyecto",
+        estPickType: "1. ¿Qué vamos a construir?",
+        estPickSpeed: "2. Plazo ideal:",
+        estCopy: "📋 Copiar Resumen para Fiverr / Email"
+      }
+    };
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let currentLang = "en";
+
+    /* 1. Humaan Split-Character Hero Reveal */
+    function renderSplitHeadline(text) {
+      const h1 = document.getElementById("heroHeadline");
+      h1.setAttribute("aria-label", text);
+      h1.classList.remove("split-ready");
+      h1.innerHTML = "";
+      const words = text.trim().split(/\s+/);
+      let charIdx = 0;
+
+      words.forEach((word, wIdx) => {
+        const wSpan = document.createElement("span");
+        wSpan.className = "split-word" + (wIdx >= words.length - 1 ? " is-muted" : "");
+        wSpan.setAttribute("aria-hidden", "true");
+        for (const ch of word) {
+          const cSpan = document.createElement("span");
+          cSpan.className = "split-char";
+          cSpan.textContent = ch;
+          cSpan.style.transitionDelay = `${charIdx * 18}ms`;
+          wSpan.appendChild(cSpan);
+          charIdx++;
+        }
+        h1.appendChild(wSpan);
+      });
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => h1.classList.add("split-ready"));
+      });
+    }
+
+    /* 2. Humaan Scroll-Driven Word-by-Word Manifesto (.jVsATG_word --progress) */
+    let manifestoWords = [];
+    function renderManifesto(text) {
+      const box = document.getElementById("manifestoText");
+      box.setAttribute("aria-label", text);
+      box.innerHTML = "";
+      manifestoWords = [];
+
+      text.trim().split(/\s+/).forEach(word => {
+        const outer = document.createElement("span");
+        outer.className = "manifesto-word";
+        outer.setAttribute("aria-hidden", "true");
+        outer.textContent = word;
+
+        const fill = document.createElement("span");
+        fill.className = "manifesto-word-fill";
+        fill.textContent = word;
+        outer.appendChild(fill);
+        box.appendChild(outer);
+        manifestoWords.push(fill);
+      });
+      updateScrollAnimations();
+    }
+
+    /* 3. Scroll Loop for Showreel clip-path Expansion + Manifesto --progress + Nav Compact */
+    const showreelFrame = document.getElementById("showreelFrame");
+    const manifestoSection = document.getElementById("manifestoSection");
+    const navPill = document.getElementById("navPill");
+
+    function updateScrollAnimations() {
+      if (window.scrollY > 40) navPill.classList.add("scrolled");
+      else navPill.classList.remove("scrolled");
+
+      if (reduceMotion) return;
+
+      // Showreel clip-path expansion (5% -> 0% inset as it enters viewport center)
+      if (showreelFrame) {
+        const rect = showreelFrame.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const p = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.65)));
+        const insetX = (5 * (1 - p)).toFixed(2);
+        const insetY = (3 * (1 - p)).toFixed(2);
+        showreelFrame.style.setProperty("--inset-x", `${insetX}%`);
+        showreelFrame.style.setProperty("--inset-y", `${insetY}%`);
+      }
+
+      // Manifesto word-by-word --progress
+      if (manifestoSection && manifestoWords.length) {
+        const rect = manifestoSection.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const total = Math.max(0, Math.min(1, (vh * 0.85 - rect.top) / (vh * 0.55)));
+        const count = manifestoWords.length;
+        manifestoWords.forEach((fill, idx) => {
+          const start = idx / count;
+          const span = 1.6 / count;
+          const prog = Math.max(0, Math.min(1, (total - start) / span));
+          fill.style.setProperty("--progress", prog.toFixed(3));
+        });
+      }
+    }
+
+    let scrollTicking = false;
+    window.addEventListener("scroll", () => {
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          updateScrollAnimations();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    /* 4. Sliding Morphing Nav Hover Indicator */
+    const navLinksWrap = document.getElementById("navLinks");
+    const navIndicator = document.getElementById("navHoverPill");
+    if (navLinksWrap && navIndicator) {
+      navLinksWrap.querySelectorAll("a").forEach(link => {
+        link.addEventListener("mouseenter", () => {
+          navIndicator.style.width = `${link.offsetWidth}px`;
+          navIndicator.style.transform = `translateX(${link.offsetLeft}px)`;
+          navIndicator.style.opacity = "1";
+        });
+      });
+      navLinksWrap.addEventListener("mouseleave", () => {
+        navIndicator.style.opacity = "0";
+      });
+    }
+
+    /* 5. Humaan 60fps Lerp Custom Cursor Follower + Magnetic Buttons */
+    const cursorEl = document.getElementById("customCursor");
+    if (cursorEl && !reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+      let mx = -100, my = -100, cx = -100, cy = -100;
+      window.addEventListener("mousemove", e => {
+        mx = e.clientX;
+        my = e.clientY;
+      });
+      function tickCursor() {
+        cx += (mx - cx) * 0.18;
+        cy += (my - cy) * 0.18;
+        cursorEl.style.left = `${cx}px`;
+        cursorEl.style.top = `${cy}px`;
+        requestAnimationFrame(tickCursor);
+      }
+      requestAnimationFrame(tickCursor);
+
+      document.querySelectorAll("[data-cursor]").forEach(el => {
+        el.addEventListener("mouseenter", () => {
+          cursorEl.textContent = el.getAttribute("data-cursor");
+          cursorEl.classList.add("active");
+        });
+        el.addEventListener("mouseleave", () => {
+          cursorEl.classList.remove("active");
+        });
+      });
+
+      document.querySelectorAll("[data-magnetic]").forEach(btn => {
+        btn.addEventListener("mousemove", e => {
+          const r = btn.getBoundingClientRect();
+          const dx = (e.clientX - r.left - r.width / 2) * 0.22;
+          const dy = (e.clientY - r.top - r.height / 2) * 0.22;
+          btn.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+        btn.addEventListener("mouseleave", () => {
+          btn.style.transform = "translate(0px, 0px)";
+        });
+      });
+    }
+
+    /* Language Switcher */
+    function applyLang(lang) {
+      currentLang = lang;
+      const dict = I18N[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const k = el.getAttribute("data-i18n");
+        if (dict[k]) el.textContent = dict[k];
+      });
+      renderSplitHeadline(dict.heroHeadline);
+      renderManifesto(dict.manifesto);
+      document.getElementById("langToggle").textContent = lang === "en" ? "ES / EN" : "EN / ES";
+    }
+
+    document.getElementById("langToggle").addEventListener("click", () => {
+      applyLang(currentLang === "en" ? "es" : "en");
+    });
+
+    /* Light / Dark Mode */
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const root = document.documentElement;
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      document.getElementById("themeToggle").textContent = next === "dark" ? "☀" : "☾";
+    });
+
+    /* 3D Mii Tilt */
+    const tiltCard = document.getElementById("miiTiltCard");
+    if (tiltCard && !reduceMotion) {
+      tiltCard.addEventListener("mousemove", e => {
+        const rect = tiltCard.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        tiltCard.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+      });
+      tiltCard.addEventListener("mouseleave", () => {
+        tiltCard.style.transform = "rotateY(0deg) rotateX(0deg)";
+      });
+    }
+
+    /* Grid Entrance Reveal */
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    /* Case 02: Interactive SaaS Switcher */
+    const SAAS_DATA = {
+      "7d": { rev: "$4,280", conv: "4.8%", users: "1,420", line: "M0,95 L70,78 L140,82 L210,50 L280,58 L350,30 L420,18", area: "M0,95 L70,78 L140,82 L210,50 L280,58 L350,30 L420,18 L420,120 L0,120 Z" },
+      "30d": { rev: "$18,940", conv: "5.4%", users: "6,180", line: "M0,102 L70,92 L140,65 L210,70 L280,38 L350,24 L420,10", area: "M0,102 L70,92 L140,65 L210,70 L280,38 L350,24 L420,10 L420,120 L0,120 Z" },
+      "12m": { rev: "$142,600", conv: "6.1%", users: "48,900", line: "M0,110 L70,98 L140,86 L210,64 L280,48 L350,26 L420,8", area: "M0,110 L70,98 L140,86 L210,64 L280,48 L350,26 L420,8 L420,120 L0,120 Z" }
+    };
+    document.querySelectorAll(".saas-tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".saas-tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const d = SAAS_DATA[btn.getAttribute("data-range")];
+        document.getElementById("kpiRev").textContent = d.rev;
+        document.getElementById("kpiConv").textContent = d.conv;
+        document.getElementById("kpiUsers").textContent = d.users;
+        document.getElementById("chartLine").setAttribute("d", d.line);
+        document.getElementById("chartArea").setAttribute("d", d.area);
+      });
+    });
+
+    /* Case 03: Command Palette */
+    const CMD_OUTPUTS = {
+      csv: "✓ Parsed 1,248 rows · Removed 34 duplicates · Exported clean_orders.json in 0.14s",
+      seo: "✓ LCP: 0.7s · CLS: 0.00 · INP: 18ms · Accessibility Score: 100/100",
+      ext: "✓ Bundled Manifest V3 popup + service worker · Ready for Chrome Web Store (42 KB)"
+    };
+    document.querySelectorAll(".cmd-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".cmd-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("cmdOutput").textContent = CMD_OUTPUTS[btn.getAttribute("data-cmd")];
+      });
+    });
+
+    /* Video Modal (triggered from Showreel or Case 01) */
+    const videoModal = document.getElementById("videoModal");
+    const videoEl = document.getElementById("demoVideoPlayer");
+    function openVideoModal() {
+      videoModal.showModal();
+      videoEl.play().catch(() => {});
+    }
+    document.getElementById("openVideoBtn").addEventListener("click", openVideoModal);
+    showreelFrame.addEventListener("click", openVideoModal);
+    showreelFrame.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openVideoModal(); }
+    });
+    document.getElementById("closeVideoBtn").addEventListener("click", () => {
+      videoEl.pause();
+      videoModal.close();
+    });
+    videoModal.addEventListener("click", e => {
+      if (e.target === videoModal) { videoEl.pause(); videoModal.close(); }
+    });
+
+    /* Project Estimator Modal */
+    const estModal = document.getElementById("estimatorModal");
+    let estType = "Landing Page / Portfolio";
+    let estSpeed = "Express (48–72 hours)";
+    function updateSummary() {
+      document.getElementById("estSummaryBox").textContent =
+        `Hi Aitor!\nI'd like to build: ${estType}\nTarget timeline: ${estSpeed}\nLet's discuss details and scope.`;
+    }
+    updateSummary();
+    ["openEstimatorTop", "openEstimatorHero", "openEstimatorFooter"].forEach(id => {
+      document.getElementById(id).addEventListener("click", () => estModal.showModal());
+    });
+    document.getElementById("closeEstBtn").addEventListener("click", () => estModal.close());
+    estModal.addEventListener("click", e => {
+      if (e.target === estModal) estModal.close();
+    });
+    document.querySelectorAll("#estTypeGroup .est-chip").forEach(c => {
+      c.addEventListener("click", () => {
+        document.querySelectorAll("#estTypeGroup .est-chip").forEach(x => x.classList.remove("active"));
+        c.classList.add("active");
+        estType = c.getAttribute("data-val");
+        updateSummary();
+      });
+    });
+    document.querySelectorAll("#estSpeedGroup .est-chip").forEach(c => {
+      c.addEventListener("click", () => {
+        document.querySelectorAll("#estSpeedGroup .est-chip").forEach(x => x.classList.remove("active"));
+        c.classList.add("active");
+        estSpeed = c.getAttribute("data-val");
+        updateSummary();
+      });
+    });
+    document.getElementById("copyBriefBtn").addEventListener("click", () => {
+      navigator.clipboard.writeText(document.getElementById("estSummaryBox").textContent).then(() => {
+        const btn = document.getElementById("copyBriefBtn");
+        const old = btn.textContent;
+        btn.textContent = "✓ Copied!";
+        setTimeout(() => (btn.textContent = old), 1800);
+      });
+    });
+
+    // Boot
+    applyLang("en");
+  </script>
+</body>
+</html>
